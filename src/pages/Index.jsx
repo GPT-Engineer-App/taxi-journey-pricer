@@ -98,7 +98,7 @@ const Index = () => {
                 <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
               </Box>
               {/* Placeholder for future price spread calculator */}
-              <Box p={4} borderWidth="1px" borderRadius="lg">
+              <Box p={4} borderWidth="1px" borderRadius="lg" w="100%">
                 <Text fontSize="md" fontWeight="semibold">
                   Price Spread Calculator:
                 </Text>
