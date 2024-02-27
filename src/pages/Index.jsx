@@ -43,11 +43,11 @@ const Index = () => {
     }
 
     const remainingYards = yards - tariff.distanceYards;
-    const additionalCost = Math.ceil(remainingYards / tariff.distanceYards) * tariff.distanceCost;
-    let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)}\n`;
-    if (additionalCost > 0) {
-      breakdownDetails += `Additional Distance: ${Math.ceil(remainingYards / tariff.distanceYards)} x £${tariff.distanceCost.toFixed(2)} = £${additionalCost.toFixed(2)}\n`;
-    }
+    const initialDistanceCost = tariff.startFee;
+    const additionalYards = Math.ceil(remainingYards / tariff.distanceYards);
+    const additionalCost = additionalYards * tariff.distanceCost;
+    let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)} (for the first ${tariff.distanceYards} yards)\n`;
+    breakdownDetails += `Yard Breakdown: £${initialDistanceCost.toFixed(2)} + ${additionalYards} x £${tariff.distanceCost.toFixed(2)} (per additional ${tariff.distanceYards} yards) = £${additionalCost.toFixed(2)}\n`;
     const totalCost = tariff.startFee + additionalCost;
     const calculatedCostPerMile = totalCost / miles;
 
