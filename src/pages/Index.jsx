@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid } from "@chakra-ui/react";
 import { FaTaxi } from "react-icons/fa";
+import FareChart from "../components/FareChart.jsx";
 
 const tariffRates = {
   tariff1: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 168, distanceCost: 0.2 },
@@ -57,39 +58,42 @@ const Index = () => {
   };
 
   return (
-    <Container centerContent>
-      <Box p={6} borderWidth="1px" borderRadius="lg" w="100%" mt={4}>
-        <VStack spacing={4}>
-          <Text fontSize="2xl" fontWeight="bold" textAlign="center">
-            Taxi Fare Calculator <FaTaxi />
-          </Text>
-          <FormControl id="date-time">
-            <FormLabel>Date and Time</FormLabel>
-            <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
-          </FormControl>
-          <FormControl id="miles">
-            <FormLabel>Distance (miles)</FormLabel>
-            <NumberInput min={0} onChange={(valueString) => setMiles(parseFloat(valueString))}>
-              <NumberInputField />
-            </NumberInput>
-          </FormControl>
-          <Button colorScheme="blue" onClick={calculateCost}>
-            Calculate Fare
-          </Button>
-          {cost !== null && (
-            <VStack spacing={4} pt={4}>
-              <Text>Total Cost: £{cost}</Text>
-              <Text>Cost per Mile: £{costPerMile}</Text>
-              {breakdown && (
-                <Box p={4} borderWidth="1px" borderRadius="lg">
-                  <Text>Cost Breakdown:</Text>
-                  <Text whiteSpace="pre-wrap">{breakdown}</Text>
-                </Box>
-              )}
-            </VStack>
-          )}
-        </VStack>
-      </Box>
+    <Container maxW="container.xl" p={6}>
+      <Grid templateColumns="300px 1fr" gap={6}>
+        <FareChart tariffRates={tariffRates} />
+        <Box borderWidth="1px" borderRadius="lg" p={6} w="100%">
+          <VStack spacing={4}>
+            <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+              Taxi Fare Calculator <FaTaxi />
+            </Text>
+            <FormControl id="date-time">
+              <FormLabel>Date and Time</FormLabel>
+              <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
+            </FormControl>
+            <FormControl id="miles">
+              <FormLabel>Distance (miles)</FormLabel>
+              <NumberInput min={0} onChange={(valueString) => setMiles(parseFloat(valueString))}>
+                <NumberInputField />
+              </NumberInput>
+            </FormControl>
+            <Button colorScheme="blue" onClick={calculateCost}>
+              Calculate Fare
+            </Button>
+            {cost !== null && (
+              <VStack spacing={4} pt={4}>
+                <Text>Total Cost: £{cost}</Text>
+                <Text>Cost per Mile: £{costPerMile}</Text>
+                {breakdown && (
+                  <Box p={4} borderWidth="1px" borderRadius="lg">
+                    <Text>Cost Breakdown:</Text>
+                    <Text whiteSpace="pre-wrap">{breakdown}</Text>
+                  </Box>
+                )}
+              </VStack>
+            )}
+          </VStack>
+        </Box>
+      </Grid>
     </Container>
   );
 };
