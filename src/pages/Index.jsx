@@ -79,6 +79,15 @@ const Index = () => {
             <Button colorScheme="blue" onClick={calculateCost}>
               Calculate Fare
             </Button>
+            <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
+              <Text fontWeight="bold" mb={2}>
+                Incremental Pricing Scale
+              </Text>
+              {/* This is a placeholder for dynamic scale pricing. It should be replaced with actual logic to calculate scale pricing */}
+              <Text>0 - 0.3 miles: £1.30</Text>
+              <Text>0.3 - 0.6 miles: £1.40</Text>
+              {/* ... More ranges and prices here */}
+            </Box>
             {cost !== null && (
               <VStack spacing={4} pt={4}>
                 <Text>Total Cost: £{cost}</Text>
