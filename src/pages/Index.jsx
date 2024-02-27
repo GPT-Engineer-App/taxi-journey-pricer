@@ -79,35 +79,7 @@ const Index = () => {
             <Button colorScheme="blue" onClick={calculateCost}>
               Calculate Fare
             </Button>
-            <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
-              <Text fontWeight="bold" mb={2}>
-                Incremental Pricing Scale
-              </Text>
-              <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
-                <Text fontWeight="bold" mb={2}>
-                  Incremental Pricing Scale
-                </Text>
-                <Text>Start price: £1.50</Text>
-                {Object.keys(tariffRates).map((tariffKey) => {
-                  // Example scale calculation, this should be replaced with actual logic based on tariff details
-                  const tariff = tariffRates[tariffKey];
-                  const basePrice = 1.5;
-                  const unitPrice = tariff.startFee + (tariff.distanceCost / tariff.distanceYards) * 1760;
-                  return (
-                    <Box key={tariffKey} mb={5}>
-                      <VStack align="start" spacing={2}>
-                        <Text fontWeight="bold">Tariff {tariffKey.slice(-1)} Scale:</Text>
-                        <Text>£{basePrice.toFixed(2)} - Start price</Text>
-                        <Text>0 - 0.3 miles: £{(unitPrice / 3 + basePrice).toFixed(2)}</Text>
-                        <Text>0.3 - 0.6 miles: £{(unitPrice / 2 + basePrice).toFixed(2)}</Text>
-                        <Text>0.6 - 1 mile: £{unitPrice.toFixed(2)}</Text>
-                      </VStack>
-                      {/* Further increments should be calculated to span the entire range up to the maximum miles */}
-                    </Box>
-                  );
-                })}
-              </Box>
-            </Box>
+            {/* Incremental Pricing Scale section has been removed as per the update request */}
             {cost !== null && (
               <VStack spacing={4} pt={4}>
                 <Text>Total Cost: £{cost}</Text>
