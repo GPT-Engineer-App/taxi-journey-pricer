@@ -17,8 +17,17 @@ const Index = () => {
   const [breakdown, setBreakdown] = useState(null);
   const toast = useToast();
 
+  const [priceSpread, setPriceSpread] = useState({});
+  const calculatePriceSpread = (totalCost) => {
+    return {
+      from0To03: ((totalCost / miles) * 0.3).toFixed(2),
+      from03To06: ((totalCost / miles) * 0.3).toFixed(2),
+      from06To1: ((totalCost / miles) * 0.4).toFixed(2),
+    };
+  };
   const calculateCost = () => {
     if (!dateTime || miles <= 0) {
+      // ... existing code ...
       toast({
         title: "Error",
         description: "Please enter a valid date/time and miles",
@@ -50,6 +59,7 @@ const Index = () => {
     let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)} (for the first ${tariff.distanceYards} yards)\n`;
     breakdownDetails += `Yard Breakdown: £${initialDistanceCost.toFixed(2)} + ${additionalYards} x £${tariff.distanceCost.toFixed(2)} (per additional ${tariff.distanceYards} yards) = £${additionalCost.toFixed(2)}\n`;
     const totalCost = tariff.startFee + additionalCost;
+    setPriceSpread(calculatePriceSpread(totalCost));
     const calculatedCostPerMile = totalCost / miles;
 
     setCost(totalCost.toFixed(2));
@@ -92,7 +102,11 @@ const Index = () => {
                 <Text fontSize="md" fontWeight="semibold">
                   Price Spread Calculator:
                 </Text>
-                <Text>This feature will be implemented soon.</Text>
+                <VStack spacing={2}>
+                  <Text>0 to 0.3 miles: £{priceSpread.from0To03 || "0.00"}</Text>
+                  <Text>0.3 to 0.6 miles: £{priceSpread.from03To06 || "0.00"}</Text>
+                  <Text>0.6 to 1 mile: £{priceSpread.from06To1 || "0.00"}</Text>
+                </VStack>
               </Box>
             </VStack>
           </VStack>
