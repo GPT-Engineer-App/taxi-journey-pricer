@@ -59,7 +59,7 @@ const Index = () => {
 
   return (
     <Container maxW="container.xl" p={6}>
-      <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+      <Grid templateColumns="1fr 2fr" gap={6}>
         <FareChart tariffRates={tariffRates} />
         <Box borderWidth="1px" borderRadius="lg" p={6} w="100%">
           <VStack spacing={4}>
