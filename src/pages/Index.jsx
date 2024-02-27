@@ -83,10 +83,16 @@ const Index = () => {
               <Text fontWeight="bold" mb={2}>
                 Incremental Pricing Scale
               </Text>
-              {/* This is a placeholder for dynamic scale pricing. It should be replaced with actual logic to calculate scale pricing */}
-              <Text>0 - 0.3 miles: £1.30</Text>
-              <Text>0.3 - 0.6 miles: £1.40</Text>
-              {/* ... More ranges and prices here */}
+              <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
+                <Text fontWeight="bold" mb={2}>
+                  Incremental Pricing Scale
+                </Text>
+                <Text>Start price: £1.50</Text>
+                {/* Placeholder for incremental pricing scale logic */}
+                <Text>0 - 0.3 miles: £1.30</Text>
+                <Text>0.3 - 0.6 miles: £1.40</Text>
+                {/* ... More ranges and prices to match final price per mile for each tariff */}
+              </Box>
             </Box>
             {cost !== null && (
               <VStack spacing={4} pt={4}>
