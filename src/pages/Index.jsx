@@ -13,6 +13,7 @@ const Index = () => {
   const [miles, setMiles] = useState(0);
   const [cost, setCost] = useState(null);
   const [costPerMile, setCostPerMile] = useState(null);
+  const [breakdown, setBreakdown] = useState(null);
   const toast = useToast();
 
   const calculateCost = () => {
@@ -43,11 +44,16 @@ const Index = () => {
 
     const remainingYards = yards - tariff.distanceYards;
     const additionalCost = Math.ceil(remainingYards / tariff.distanceYards) * tariff.distanceCost;
+    let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)}\n`;
+    if (additionalCost > 0) {
+      breakdownDetails += `Additional Distance: ${Math.ceil(remainingYards / tariff.distanceYards)} x £${tariff.distanceCost.toFixed(2)} = £${additionalCost.toFixed(2)}\n`;
+    }
     const totalCost = tariff.startFee + additionalCost;
     const calculatedCostPerMile = totalCost / miles;
 
     setCost(totalCost.toFixed(2));
     setCostPerMile(calculatedCostPerMile.toFixed(2));
+    setBreakdown(breakdownDetails);
   };
 
   return (
@@ -71,10 +77,16 @@ const Index = () => {
             Calculate Fare
           </Button>
           {cost !== null && (
-            <Box pt={4}>
+            <VStack spacing={4} pt={4}>
               <Text>Total Cost: £{cost}</Text>
               <Text>Cost per Mile: £{costPerMile}</Text>
-            </Box>
+              {breakdown && (
+                <Box p={4} borderWidth="1px" borderRadius="lg">
+                  <Text>Cost Breakdown:</Text>
+                  <Text whiteSpace="pre-wrap">{breakdown}</Text>
+                </Box>
+              )}
+            </VStack>
           )}
         </VStack>
       </Box>
