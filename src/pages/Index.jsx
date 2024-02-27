@@ -94,12 +94,14 @@ const Index = () => {
                   const basePrice = 1.5;
                   const unitPrice = tariff.startFee + (tariff.distanceCost / tariff.distanceYards) * 1760;
                   return (
-                    <Box key={tariffKey}>
-                      <Text fontWeight="bold">Tariff {tariffKey.slice(-1)} Scale:</Text>
-                      <Text>£{basePrice.toFixed(2)} - Start price</Text>
-                      <Text>0 - 0.3 miles: £{(unitPrice / 3 + basePrice).toFixed(2)}</Text>
-                      <Text>0.3 - 0.6 miles: £{(unitPrice / 2 + basePrice).toFixed(2)}</Text>
-                      <Text>0.6 - 1 mile: £{unitPrice.toFixed(2)}</Text>
+                    <Box key={tariffKey} mb={5}>
+                      <VStack align="start" spacing={2}>
+                        <Text fontWeight="bold">Tariff {tariffKey.slice(-1)} Scale:</Text>
+                        <Text>£{basePrice.toFixed(2)} - Start price</Text>
+                        <Text>0 - 0.3 miles: £{(unitPrice / 3 + basePrice).toFixed(2)}</Text>
+                        <Text>0.3 - 0.6 miles: £{(unitPrice / 2 + basePrice).toFixed(2)}</Text>
+                        <Text>0.6 - 1 mile: £{unitPrice.toFixed(2)}</Text>
+                      </VStack>
                       {/* Further increments should be calculated to span the entire range up to the maximum miles */}
                     </Box>
                   );
