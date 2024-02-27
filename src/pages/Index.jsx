@@ -88,10 +88,22 @@ const Index = () => {
                   Incremental Pricing Scale
                 </Text>
                 <Text>Start price: £1.50</Text>
-                {/* Placeholder for incremental pricing scale logic */}
-                <Text>0 - 0.3 miles: £1.30</Text>
-                <Text>0.3 - 0.6 miles: £1.40</Text>
-                {/* ... More ranges and prices to match final price per mile for each tariff */}
+                {Object.keys(tariffRates).map((tariffKey) => {
+                  // Example scale calculation, this should be replaced with actual logic based on tariff details
+                  const tariff = tariffRates[tariffKey];
+                  const basePrice = 1.5;
+                  const unitPrice = tariff.startFee + (tariff.distanceCost / tariff.distanceYards) * 1760;
+                  return (
+                    <Box key={tariffKey}>
+                      <Text fontWeight="bold">Tariff {tariffKey.slice(-1)} Scale:</Text>
+                      <Text>£{basePrice.toFixed(2)} - Start price</Text>
+                      <Text>0 - 0.3 miles: £{(unitPrice / 3 + basePrice).toFixed(2)}</Text>
+                      <Text>0.3 - 0.6 miles: £{(unitPrice / 2 + basePrice).toFixed(2)}</Text>
+                      <Text>0.6 - 1 mile: £{unitPrice.toFixed(2)}</Text>
+                      {/* Further increments should be calculated to span the entire range up to the maximum miles */}
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
             {cost !== null && (
