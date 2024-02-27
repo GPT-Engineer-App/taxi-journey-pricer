@@ -80,25 +80,21 @@ const Index = () => {
               Calculate Fare
             </Button>
             {/* Incremental Pricing Scale section has been removed as per the update request */}
-            {cost !== null && (
-              <VStack spacing={4} pt={4}>
-                <Text>Total Cost: £{cost}</Text>
-                <Text>Cost per Mile: £{costPerMile}</Text>
-                {breakdown && (
-                  <Box p={4} borderWidth="1px" borderRadius="lg">
-                    <Text>Cost Breakdown:</Text>
-                    <Text whiteSpace="pre-wrap">{breakdown}</Text>
-                  </Box>
-                )}
-                {/* Placeholder for future price spread calculator */}
-                <Box p={4} borderWidth="1px" borderRadius="lg">
-                  <Text fontSize="md" fontWeight="semibold">
-                    Price Spread Calculator:
-                  </Text>
-                  <Text>This feature will be implemented soon.</Text>
-                </Box>
-              </VStack>
-            )}
+            <VStack spacing={4} pt={4}>
+              <Text>Total Cost: £{cost || "0.00"}</Text>
+              <Text>Cost per Mile: £{costPerMile || "0.00"}</Text>
+              <Box p={4} borderWidth="1px" borderRadius="lg">
+                <Text>Cost Breakdown:</Text>
+                <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
+              </Box>
+              {/* Placeholder for future price spread calculator */}
+              <Box p={4} borderWidth="1px" borderRadius="lg">
+                <Text fontSize="md" fontWeight="semibold">
+                  Price Spread Calculator:
+                </Text>
+                <Text>This feature will be implemented soon.</Text>
+              </Box>
+            </VStack>
           </VStack>
         </Box>
       </Grid>
