@@ -20,9 +20,15 @@ const FareChart = ({ tariffRates }) => {
         <Thead>
           <Tr>
             <Th>Miles</Th>
-            {Object.keys(tariffRates).map((tariffKey) => (
-              <Th key={tariffKey}>Tariff {tariffKey.slice(-1)}</Th>
-            ))}
+            {Object.keys(tariffRates).map((tariffKey) => {
+              const tariff = tariffRates[tariffKey];
+              const costPerMile = (tariff.distanceCost / (tariff.distanceYards / 1760)).toFixed(2);
+              return (
+                <Th key={tariffKey}>
+                  Tariff {tariffKey.slice(-1)} <br /> (£{costPerMile}/mile)
+                </Th>
+              );
+            })}
           </Tr>
         </Thead>
         <Tbody>
