@@ -7,7 +7,7 @@ const Sidebar = () => {
   return (
     <Box w="200px" h="100vh" p={5} bg="brand.900" color="white">
       <VStack align="stretch" spacing={5}>
-        <Button leftIcon={<FaHome />} colorScheme="teal" as={NavLink} to="/" activeClassName="active">
+        <Button leftIcon={<FaHome />} colorScheme="teal" as={NavLink} to="/">
           Home
         </Button>
         <Button leftIcon={<FaInfo />} colorScheme="teal">
