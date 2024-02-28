@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid, Select } from "@chakra-ui/react";
 import { FaTaxi } from "react-icons/fa";
 import FareChart from "../components/FareChart.jsx";
 
@@ -17,8 +17,12 @@ const Index = () => {
   const [breakdown, setBreakdown] = useState(null);
   const toast = useToast();
 
+  const [selectedTariff, setSelectedTariff] = useState("");
   const [priceSpread, setPriceSpread] = useState({});
+  let tariff = selectedTariff ? tariffRates[selectedTariff] : null;
   const calculatePriceSpread = (totalCost, startFee) => {
+    // Subtracting the start fee from the total cost before calculating the cost per mile
+    // ... rest of the code ...
     // Subtracting the start fee from the total cost before calculating the cost per mile
     const costExcludingStartFee = totalCost - startFee;
     const oneMileCost = costExcludingStartFee > 0 ? (costExcludingStartFee / miles) * (miles < 1 ? miles : 1) : 0;
@@ -44,14 +48,7 @@ const Index = () => {
     const hour = date.getHours();
     const yards = miles * 1760; // There are 1760 yards in a mile
 
-    let tariff;
-    if (hour >= tariffRates.tariff1.startTime && hour < tariffRates.tariff1.endTime && day >= 1 && day <= 5) {
-      tariff = tariffRates.tariff1;
-    } else if ((hour >= tariffRates.tariff2.startTime || day === 0 || day === 6) && hour < tariffRates.tariff2.endTime) {
-      tariff = tariffRates.tariff2;
-    } else {
-      tariff = tariffRates.tariff3;
-    }
+    // Removed the time-based tariff selection logic and replaced it with selection based on the `selectedTariff` state.
 
     const remainingYards = yards - tariff.distanceYards;
     const initialDistanceCost = tariff.startFee;
@@ -87,13 +84,22 @@ const Index = () => {
               <NumberInput min={0} onChange={(valueString) => setMiles(parseFloat(valueString))}>
                 <NumberInputField />
               </NumberInput>
+              <FormLabel mt={4}>Select Tariff</FormLabel>
+              <Select placeholder="Select tariff" onChange={(e) => setSelectedTariff(e.target.value)}>
+                {Object.keys(tariffRates).map((tariffKey) => (
+                  <option value={tariffKey} key={tariffKey}>
+                    Tariff {tariffKey.slice(-1)}
+                  </option>
+                ))}
+              </Select>
             </FormControl>
+
             <Button colorScheme="blue" onClick={calculateCost}>
               Calculate Fare
             </Button>
             {/* Incremental Pricing Scale section has been removed as per the update request */}
             <VStack spacing={4} pt={4}>
-              <Text>Total Cost: £{cost || "0.00"}</Text>
+              <Text>Total Cost: £{selectedTariff && cost ? cost : "0.00"}</Text>
               <Text>Cost per Mile: £{costPerMile || "0.00"}</Text>
               <Box p={4} borderWidth="1px" borderRadius="lg">
                 <Text>Cost Breakdown:</Text>
