@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Box, Container, FormControl, FormLabel, Input, Button, VStack, useToast, useNavigate } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { Box, Container, FormControl, FormLabel, Input, Button, VStack, useToast } from "@chakra-ui/react";
 
 const LoginPage = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
 
+  const navigate = useNavigate();
   const handleSubmit = async () => {
     if (username === "admin" && password === "admin") {
       onLoginSuccess();
