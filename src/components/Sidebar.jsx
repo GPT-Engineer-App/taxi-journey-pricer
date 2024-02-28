@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, VStack, Button } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar } from "react-icons/fa";
+import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar, FaCalendarAlt } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
@@ -24,6 +24,9 @@ const Sidebar = () => {
         </Button>
         <Button leftIcon={<FaChartBar />} colorScheme="teal" as={NavLink} to="/charts">
           Charts
+        </Button>
+        <Button leftIcon={<FaCalendarAlt />} colorScheme="teal" as={NavLink} to="/shift">
+          Shift
         </Button>
       </VStack>
     </Box>
