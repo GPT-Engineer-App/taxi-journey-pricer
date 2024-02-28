@@ -76,11 +76,11 @@ const Index = () => {
             <Text fontSize="2xl" fontWeight="bold" textAlign="center">
               Taxi Fare Calculator <FaTaxi />
             </Text>
-            <FormControl id="date-time">
+            <FormControl id="date-time" w="100%">
               <FormLabel>Date and Time</FormLabel>
               <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
             </FormControl>
-            <FormControl id="miles">
+            <FormControl id="miles" w="100%">
               <FormLabel>Distance (miles)</FormLabel>
               <NumberInput min={0} onChange={(valueString) => setMiles(parseFloat(valueString))}>
                 <NumberInputField />
