@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, VStack, Button } from "@chakra-ui/react";
-import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope } from "react-icons/fa";
+import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
@@ -20,6 +20,9 @@ const Sidebar = () => {
         </Button>
         <Button leftIcon={<FaEnvelope />} colorScheme="teal">
           Contact
+        </Button>
+        <Button leftIcon={<FaChartBar />} colorScheme="teal">
+          Charts
         </Button>
       </VStack>
     </Box>
