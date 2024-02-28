@@ -20,7 +20,8 @@ function App() {
         <Box flex="1">
           <Routes>
             <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginSuccess} />} />
-            <Route exact path="/" element={isAuthenticated ? <Index /> : <Navigate to="/login" />} />
+            <Route path="/home" element={isAuthenticated ? <Index /> : <Navigate to="/login" />} />
+            <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/charts" element={isAuthenticated ? <ChartsDashboard /> : <Navigate to="/login" />} />
           </Routes>
         </Box>
