@@ -18,8 +18,10 @@ const Index = () => {
   const toast = useToast();
 
   const [priceSpread, setPriceSpread] = useState({});
-  const calculatePriceSpread = (totalCost) => {
-    const oneMileCost = totalCost > 0 ? (totalCost / miles) * (miles < 1 ? miles : 1) : 0;
+  const calculatePriceSpread = (totalCost, startFee) => {
+    // Subtracting the start fee from the total cost before calculating the cost per mile
+    const costExcludingStartFee = totalCost - startFee;
+    const oneMileCost = costExcludingStartFee > 0 ? (costExcludingStartFee / miles) * (miles < 1 ? miles : 1) : 0;
     return {
       upToOneMile: oneMileCost.toFixed(2),
     };
@@ -58,7 +60,8 @@ const Index = () => {
     let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)} (for the first ${tariff.distanceYards} yards)\n`;
     breakdownDetails += `Yard Breakdown: £${initialDistanceCost.toFixed(2)} + ${additionalYards} x £${tariff.distanceCost.toFixed(2)} (per additional ${tariff.distanceYards} yards) = £${additionalCost.toFixed(2)}\n`;
     const totalCost = tariff.startFee + additionalCost;
-    setPriceSpread(calculatePriceSpread(totalCost));
+    // Passing the start fee to the calculatePriceSpread function
+    setPriceSpread(calculatePriceSpread(totalCost, tariff.startFee));
     const calculatedCostPerMile = totalCost / miles;
 
     setCost(totalCost.toFixed(2));
