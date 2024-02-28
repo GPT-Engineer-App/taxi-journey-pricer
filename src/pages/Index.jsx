@@ -27,7 +27,7 @@ const Index = () => {
     const costExcludingStartFee = totalCost - startFee;
     const oneMileCost = costExcludingStartFee > 0 ? (costExcludingStartFee / miles) * (miles < 1 ? miles : 1) : 0;
     return {
-      upToOneMile: oneMileCost.toFixed(2),
+      upToOneMile: oneMileCost,
     };
   };
   const calculateCost = () => {
@@ -59,10 +59,10 @@ const Index = () => {
     const totalCost = tariff.startFee + additionalCost;
     // Passing the start fee to the calculatePriceSpread function
     setPriceSpread(calculatePriceSpread(totalCost, tariff.startFee));
-    const calculatedCostPerMile = miles > 1 ? (totalCost - tariff.startFee) / (miles - 1) : totalCost;
+    const calculatedCostPerMile = miles > 1 ? (totalCost - tariff.startFee) / (miles - 1) : totalCost / miles;
 
     setCost(totalCost.toFixed(2));
-    setCostPerMile(calculatedCostPerMile.toFixed(2));
+    setCostPerMile(calculatedCostPerMile);
     setBreakdown(breakdownDetails);
   };
 
