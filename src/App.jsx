@@ -1,12 +1,19 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Index from "./pages/Index.jsx";
+import { Box, Flex } from "@chakra-ui/react";
+import Index from "./pages/Index";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Index />} />
-      </Routes>
+      <Flex>
+        <Sidebar />
+        <Box flex="1">
+          <Routes>
+            <Route exact path="/" element={<Index />} />
+          </Routes>
+        </Box>
+      </Flex>
     </Router>
   );
 }
