@@ -1,5 +1,28 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Box, Button, VStack, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import { Box, Button, VStack, Text, Table, Thead, Tbody, Tr, Th, Td, Input, HStack, NumberInput, NumberInputField } from "@chakra-ui/react";
+
+const JobPriceInput = ({ onAddJobPrice }) => {
+  const [jobPrice, setJobPrice] = useState("");
+  const inputRef = useRef();
+
+  const handleAddClick = () => {
+    const price = parseFloat(jobPrice);
+    if (!isNaN(price) && price > 0) {
+      onAddJobPrice(price);
+      setJobPrice("");
+      inputRef.current.focus();
+    }
+  };
+
+  return (
+    <HStack>
+      <NumberInput value={jobPrice} onChange={setJobPrice} min={0}>
+        <NumberInputField ref={inputRef} placeholder="Enter job price" />
+      </NumberInput>
+      <Button onClick={handleAddClick}>Add Job</Button>
+    </HStack>
+  );
+};
 
 const ShiftChart = ({ shifts }) => {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -28,7 +51,7 @@ const ShiftChart = ({ shifts }) => {
 };
 
 const Shift = () => {
-  const [currentShift, setCurrentShift] = useState({ startTime: "", endTime: "", duration: "" });
+  const [currentShift, setCurrentShift] = useState({ startTime: "", endTime: "", duration: "", totalEarnings: 0, jobs: [] });
   const [shifts, setShifts] = useState(Array(7).fill(null)); // Array for 7 days of the week
   const [timerOn, setTimerOn] = useState(false);
 
@@ -67,21 +90,35 @@ const Shift = () => {
     setTimerOn(false);
   };
 
+  const addJobPrice = (price) => {
+    setCurrentShift((prevShift) => {
+      const newJobs = [...prevShift.jobs, price];
+      const newTotalEarnings = newJobs.reduce((sum, jobPrice) => sum + jobPrice, 0);
+      return { ...prevShift, jobs: newJobs, totalEarnings: newTotalEarnings };
+    });
+  };
+
+  const calculateEarningsPerHour = (totalEarnings, duration) => {
+    const durationInSeconds = duration.split(":").reduce((acc, time) => 60 * acc + +time, 0);
+    const durationInHours = durationInSeconds / 3600;
+    return durationInHours > 0 ? (totalEarnings / durationInHours).toFixed(2) : "0.00";
+  };
+
   const stopShift = () => {
     const endTime = new Date();
-    setCurrentShift((prevShift) => ({
-      startTime: prevShift.startTime,
-      endTime: endTime.toLocaleTimeString(),
-      duration: new Date(endTime - new Date(prevShift.startTime)).toISOString().substr(11, 8),
-    }));
-    const dayIndex = endTime.getDay();
-    setShifts((prevShifts) => prevShifts.map((shift, i) => (i === dayIndex ? {
-      ...shift,
-      endTime: endTime.toLocaleTimeString(),
-      duration: new Date(endTime - new Date(currentShift.startTime)).toISOString().substr(11, 8)
-    } : shift)));
+    setCurrentShift((prevShift) => {
+      const newDuration = new Date(endTime - new Date(prevShift.startTime)).toISOString().substr(11, 8);
+      const earningsPerHour = calculateEarningsPerHour(prevShift.totalEarnings, newDuration);
+      return {
+        ...prevShift,
+        endTime: endTime.toLocaleTimeString(),
+        duration: newDuration,
+        earningsPerHour: earningsPerHour,
+      };
+    });
     setTimerOn(false);
   };
+  // This block is removed as it was a duplicate caused by incorrect merge in the previous edit
 
   const shiftChart = useMemo(() => <ShiftChart shifts={shifts} />, [shifts]);
 
@@ -102,7 +139,12 @@ const Shift = () => {
           </Button>
         </VStack>
       </Box>
-      <Box w="100%">{shiftChart}</Box>
+      <Box w="100%">
+        {shiftChart}
+        <JobPriceInput onAddJobPrice={addJobPrice} />
+        <Text>Total Earnings: £{currentShift.totalEarnings.toFixed(2)}</Text>
+        <Text>Earnings Per Hour: £{currentShift.earningsPerHour || "0.00"}</Text>
+      </Box>
     </VStack>
   );
 };
