@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Container, FormControl, FormLabel, Input, Button, VStack, useToast } from "@chakra-ui/react";
+import { Box, Container, FormControl, FormLabel, Input, Button, VStack, useToast, useNavigate } from "@chakra-ui/react";
 
 const LoginPage = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +9,7 @@ const LoginPage = ({ onLoginSuccess }) => {
   const handleSubmit = async () => {
     if (username === "admin" && password === "admin") {
       onLoginSuccess();
-      window.location.href = "/";
+      navigate("/");
     } else {
       toast({
         title: "Authentication Failed",
