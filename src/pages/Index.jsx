@@ -21,12 +21,12 @@ const Index = () => {
   const [selectedTariff, setSelectedTariff] = useState("");
   const [priceSpread, setPriceSpread] = useState({});
   let tariff = selectedTariff ? tariffRates[selectedTariff] : null;
-  const calculatePriceSpread = (totalCost, startFee) => {
-    // Subtracting the start fee from the total cost before calculating the cost per mile
-    // ... rest of the code ...
-    // Subtracting the start fee from the total cost before calculating the cost per mile
-    const costExcludingStartFee = totalCost - startFee;
-    const oneMileCost = (costExcludingStartFee > 0 ? (costExcludingStartFee / miles) * (miles < 1 ? miles : 1) : 0).toFixed(2);
+  const calculatePriceSpread = (totalCost, startFee, distanceYards, distanceCost) => {
+    const yardsPerMile = 1760;
+    const remainingYardsFirstMile = yardsPerMile - distanceYards;
+    const additionalSegmentsFirstMile = Math.ceil(remainingYardsFirstMile / distanceYards);
+    const costFirstMile = startFee + additionalSegmentsFirstMile * distanceCost;
+    const oneMileCost = costFirstMile.toFixed(2);
     return {
       upToOneMile: oneMileCost,
     };
