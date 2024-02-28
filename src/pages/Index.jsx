@@ -83,9 +83,7 @@ const Index = () => {
         <FareChart tariffRates={tariffRates} />
         <Box borderWidth="1px" borderRadius="lg" p={8} w="100%" bg="gray.50">
           <VStack spacing={4}>
-            <Text fontSize="3xl" fontWeight="bold" textAlign="center" mb={6}>
-              Taxi Fare Calculator <FaTaxi />
-            </Text>
+            {/* Header section removed to revert the site to its previous state */}
             <FormControl id="date-time" w="100%">
               <FormLabel>Date and Time</FormLabel>
               <Input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
