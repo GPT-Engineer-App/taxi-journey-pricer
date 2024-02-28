@@ -9,6 +9,7 @@ const LoginPage = ({ onLoginSuccess }) => {
   const handleSubmit = async () => {
     if (username === "admin" && password === "admin") {
       onLoginSuccess();
+      window.location.href = "/";
     } else {
       toast({
         title: "Authentication Failed",
