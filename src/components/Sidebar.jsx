@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, VStack, Button } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
 import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -21,7 +22,7 @@ const Sidebar = () => {
         <Button leftIcon={<FaEnvelope />} colorScheme="teal">
           Contact
         </Button>
-        <Button leftIcon={<FaChartBar />} colorScheme="teal">
+        <Button leftIcon={<FaChartBar />} colorScheme="teal" as={NavLink} to="/charts">
           Charts
         </Button>
       </VStack>
