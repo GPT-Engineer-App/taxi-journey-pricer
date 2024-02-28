@@ -56,8 +56,9 @@ const Index = () => {
     const additionalYards = Math.ceil(remainingYards / tariff.distanceYards);
     const additionalCost = additionalYards * tariff.distanceCost;
     let breakdownDetails = `Start Fee: £${tariff.startFee.toFixed(2)} (for the first ${tariff.distanceYards} yards)\n`;
-    breakdownDetails += `Yard Breakdown: £${initialDistanceCost.toFixed(2)} + ${additionalYards} x £${tariff.distanceCost.toFixed(2)} (per additional ${tariff.distanceYards} yards) = £${additionalCost.toFixed(2)}\n`;
+    breakdownDetails += `Yard Breakdown: £${initialDistanceCost.toFixed(2)} + ${additionalYards} x £${tariff.distanceCost.toFixed(2)} (per additional ${tariff.distanceYards} yards)\n`;
     const totalCost = tariff.startFee + additionalCost;
+    breakdownDetails += `Total Cost: £${totalCost.toFixed(2)}\n`;
     // Passing the start fee to the calculatePriceSpread function
     setPriceSpread(calculatePriceSpread(totalCost, tariff.startFee));
     const calculatedCostPerMile = (miles > 1 ? (totalCost - tariff.startFee) / (miles - 1) : totalCost / miles).toFixed(2);
