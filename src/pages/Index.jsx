@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid, Select } from "@chakra-ui/react";
 import { FaTaxi } from "react-icons/fa";
 import FareChart from "../components/FareChart.jsx";
+
+const calculateAdditionalMileCost = (tariffRates) => {
+  const costPerAdditionalMile = Object.entries(tariffRates).reduce((acc, [key, tariff]) => {
+    const additionalMileCost = (tariff.distanceCost / (tariff.distanceYards / 1760)).toFixed(2);
+    acc[key] = additionalMileCost;
+    return acc;
+  }, {});
+  return costPerAdditionalMile;
+};
 
 const tariffRates = {
   tariff1: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 168, distanceCost: 0.2 },
@@ -100,12 +109,24 @@ const Index = () => {
               Calculate Fare
             </Button>
             {/* Incremental Pricing Scale section has been removed as per the update request */}
-            <VStack spacing={4} pt={4}>
+            <VStack spacing={4} pt={4} align="stretch">
               <Text>Total Cost: £{selectedTariff && cost ? cost : "0.00"}</Text>
               <Text>Cost per Mile: £{costPerMile || "0.00"}</Text>
               <Box p={4} borderWidth="1px" borderRadius="lg">
                 <Text>Cost Breakdown:</Text>
                 <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
+              </Box>
+              <Box p={4} borderWidth="1px" borderRadius="lg">
+                <Text>Cost per Additional Mile:</Text>
+                {useMemo(
+                  () =>
+                    Object.entries(calculateAdditionalMileCost(tariffRates)).map(([key, cost]) => (
+                      <Text key={key}>
+                        Tariff {key.slice(-1)}: £{cost}
+                      </Text>
+                    )),
+                  [tariffRates],
+                )}
               </Box>
             </VStack>
           </VStack>
