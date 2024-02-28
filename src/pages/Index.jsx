@@ -78,12 +78,12 @@ const Index = () => {
   };
 
   return (
-    <Container maxW="container.xl" p={6}>
-      <Grid templateColumns="1fr 2fr" gap={6}>
+    <Container maxW="container.xl" p={10}>
+      <Grid templateColumns="repeat(2, 1fr)" gap={10}>
         <FareChart tariffRates={tariffRates} />
-        <Box borderWidth="1px" borderRadius="lg" p={6} w="100%">
+        <Box borderWidth="1px" borderRadius="lg" p={8} w="100%" bg="gray.50">
           <VStack spacing={4}>
-            <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+            <Text fontSize="3xl" fontWeight="bold" textAlign="center" mb={6}>
               Taxi Fare Calculator <FaTaxi />
             </Text>
             <FormControl id="date-time" w="100%">
@@ -105,28 +105,36 @@ const Index = () => {
               </Select>
             </FormControl>
 
-            <Button colorScheme="blue" onClick={calculateCost}>
+            <Button colorScheme="teal" size="lg" onClick={calculateCost}>
               Calculate Fare
             </Button>
             {/* Incremental Pricing Scale section has been removed as per the update request */}
-            <VStack spacing={4} pt={4} align="stretch">
-              <Text>Total Cost: £{selectedTariff && cost ? cost : "0.00"}</Text>
-              <Text>Cost per Mile: £{costPerMile || "0.00"}</Text>
-              <Box p={4} borderWidth="1px" borderRadius="lg">
-                <Text>Cost Breakdown:</Text>
-                <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
+            <VStack spacing={6} pt={6} align="stretch">
+              <Text fontSize="lg">Total Cost: £{selectedTariff && cost ? cost : "0.00"}</Text>
+              <Text fontSize="lg">Cost per Mile: £{costPerMile || "0.00"}</Text>
+              <Box p={6} borderWidth="1px" borderRadius="lg" bg="gray.50">
+                <Text fontSize="lg" fontWeight="semibold">
+                  Cost Breakdown:
+                </Text>
+                <Text fontSize="md" whiteSpace="pre-wrap">
+                  {breakdown || "No calculation yet."}
+                </Text>
               </Box>
-              <Box p={4} borderWidth="1px" borderRadius="lg">
-                <Text>Cost per Additional Mile After the First Mile:</Text>
-                {useMemo(
-                  () =>
-                    Object.entries(calculateAdditionalMileCost(tariffRates)).map(([key, cost]) => (
-                      <Text key={key}>
-                        Tariff {key.slice(-1)}: £{cost}
-                      </Text>
-                    )),
-                  [tariffRates],
-                )}
+              <Box p={6} borderWidth="1px" borderRadius="lg" bg="gray.50">
+                <Text fontSize="lg" fontWeight="semibold">
+                  Cost per Additional Mile After the First Mile:
+                </Text>
+                <VStack spacing={2}>
+                  {useMemo(
+                    () =>
+                      Object.entries(calculateAdditionalMileCost(tariffRates)).map(([key, cost]) => (
+                        <Text fontSize="md" key={key}>
+                          Tariff {key.slice(-1)}: £{cost}
+                        </Text>
+                      )),
+                    [tariffRates],
+                  )}
+                </VStack>
               </Box>
             </VStack>
           </VStack>
