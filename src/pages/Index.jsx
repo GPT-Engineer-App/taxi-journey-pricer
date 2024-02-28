@@ -19,10 +19,9 @@ const Index = () => {
 
   const [priceSpread, setPriceSpread] = useState({});
   const calculatePriceSpread = (totalCost) => {
+    const oneMileCost = totalCost > 0 ? (totalCost / miles) * (miles < 1 ? miles : 1) : 0;
     return {
-      from0To03: ((totalCost / miles) * 0.3).toFixed(2),
-      from03To06: ((totalCost / miles) * 0.3).toFixed(2),
-      from06To1: ((totalCost / miles) * 0.4).toFixed(2),
+      upToOneMile: oneMileCost.toFixed(2),
     };
   };
   const calculateCost = () => {
@@ -103,9 +102,7 @@ const Index = () => {
                   Price Spread Calculator:
                 </Text>
                 <VStack spacing={2}>
-                  <Text>0 to 0.3 miles: £{priceSpread.from0To03 || "0.00"}</Text>
-                  <Text>0.3 to 0.6 miles: £{priceSpread.from03To06 || "0.00"}</Text>
-                  <Text>0.6 to 1 mile: £{priceSpread.from06To1 || "0.00"}</Text>
+                  <Text>Up to 1 mile: £{priceSpread.upToOneMile || "0.00"}</Text>
                 </VStack>
               </Box>
             </VStack>
