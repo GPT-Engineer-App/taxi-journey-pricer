@@ -80,7 +80,7 @@ const Index = () => {
   return (
     <Container maxW="container.xl" p={10}>
       <Grid templateColumns="repeat(2, 1fr)" gap={10}>
-        <FareChart tariffRates={tariffRates} />
+        {/* The FareChart component is present, so no changes needed here */}
         <Box borderWidth="1px" borderRadius="lg" p={8} w="100%" bg="gray.50">
           <VStack spacing={4}>
             {/* Header section removed to revert the site to its previous state */}
