@@ -123,26 +123,30 @@ const Shift = () => {
   const shiftChart = useMemo(() => <ShiftChart shifts={shifts} />, [shifts]);
 
   return (
-    <VStack spacing={8} p={8}>
+    <VStack spacing={10} p={8}>
       <Box>
         <VStack spacing={4}>
-          <Text fontSize="2xl">Shift Timer</Text>
+          <Text fontSize="3xl" fontWeight="bold">
+            Shift Timer
+          </Text>
           <Text fontSize="xl">{currentShift.duration || "00:00:00"}</Text>
-          <Button colorScheme="green" onClick={startShift} isDisabled={timerOn}>
+          <Button size="md" colorScheme="green" onClick={startShift} isDisabled={timerOn}>
             Start
           </Button>
-          <Button colorScheme="orange" onClick={pauseShift} isDisabled={!timerOn}>
+          <Button size="md" colorScheme="yellow" onClick={pauseShift} isDisabled={!timerOn}>
             Pause
           </Button>
-          <Button colorScheme="red" onClick={stopShift} isDisabled={!currentShift.startTime}>
+          <Button size="md" colorScheme="red" onClick={stopShift} isDisabled={!currentShift.startTime}>
             Stop
           </Button>
         </VStack>
       </Box>
-      <Box w="100%">
+      <Box w="100%" p={4} shadow="md">
         {shiftChart}
         <JobPriceInput onAddJobPrice={addJobPrice} />
-        <Text>Total Earnings: £{currentShift.totalEarnings.toFixed(2)}</Text>
+        <Text fontSize="xl" fontWeight="bold">
+          Total Earnings: £{currentShift.totalEarnings.toFixed(2)}
+        </Text>
         <Text>Earnings Per Hour: £{currentShift.earningsPerHour || "0.00"}</Text>
       </Box>
     </VStack>
