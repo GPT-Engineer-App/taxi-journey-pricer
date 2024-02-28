@@ -59,7 +59,7 @@ const Index = () => {
     const totalCost = tariff.startFee + additionalCost;
     // Passing the start fee to the calculatePriceSpread function
     setPriceSpread(calculatePriceSpread(totalCost, tariff.startFee));
-    const calculatedCostPerMile = totalCost / miles;
+    const calculatedCostPerMile = miles > 1 ? (totalCost - tariff.startFee) / (miles - 1) : totalCost;
 
     setCost(totalCost.toFixed(2));
     setCostPerMile(calculatedCostPerMile.toFixed(2));
