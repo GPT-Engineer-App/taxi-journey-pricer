@@ -106,15 +106,6 @@ const Index = () => {
                 <Text>Cost Breakdown:</Text>
                 <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
               </Box>
-              {/* Placeholder for future price spread calculator */}
-              <Box p={4} borderWidth="1px" borderRadius="lg" w="100%">
-                <Text fontSize="md" fontWeight="semibold">
-                  Price Spread Calculator:
-                </Text>
-                <VStack spacing={2}>
-                  <Text>Up to 1 mile: £{priceSpread.upToOneMile || "0.00"}</Text>
-                </VStack>
-              </Box>
             </VStack>
           </VStack>
         </Box>
