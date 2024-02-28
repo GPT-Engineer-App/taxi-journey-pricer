@@ -15,8 +15,8 @@ function App() {
 
   return (
     <Router>
-      <Flex>
-        <Sidebar />
+      <Flex minHeight="100vh" direction="column">
+        {isAuthenticated && <Sidebar />}
         <Box flex="1">
           <Routes>
             <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginSuccess} />} />

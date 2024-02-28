@@ -6,15 +6,15 @@ const LoginPage = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState("");
   const toast = useToast();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (username === "admin" && password === "admin") {
       onLoginSuccess();
     } else {
       toast({
-        title: "Login Error",
-        description: "Incorrect username or password",
+        title: "Authentication Failed",
+        description: "The username or password you entered is incorrect",
         status: "error",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     }
