@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import Index from "./pages/Index";
@@ -8,11 +7,11 @@ import ChartsDashboard from "./pages/ChartsDashboard";
 function App() {
   return (
     <Router>
-      <Flex minHeight="100vh" direction="column">
+      <Flex>
         <Sidebar />
         <Box flex="1">
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route exact path="/" element={<Index />} />
             <Route path="/charts" element={<ChartsDashboard />} />
           </Routes>
         </Box>
