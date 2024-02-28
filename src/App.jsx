@@ -3,6 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import Index from "./pages/Index";
 import Sidebar from "./components/Sidebar";
 import ChartsDashboard from "./pages/ChartsDashboard";
+import Shift from "./pages/Shift";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Index />} />
             <Route path="/charts" element={<ChartsDashboard />} />
+            <Route path="/shift" element={<Shift />} />
           </Routes>
         </Box>
       </Flex>
