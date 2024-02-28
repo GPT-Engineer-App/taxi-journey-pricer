@@ -117,7 +117,7 @@ const Index = () => {
                 <Text whiteSpace="pre-wrap">{breakdown || "No calculation yet."}</Text>
               </Box>
               <Box p={4} borderWidth="1px" borderRadius="lg">
-                <Text>Cost per Additional Mile:</Text>
+                <Text>Cost per Additional Mile After the First Mile:</Text>
                 {useMemo(
                   () =>
                     Object.entries(calculateAdditionalMileCost(tariffRates)).map(([key, cost]) => (
