@@ -16,7 +16,7 @@ const FareChart = ({ tariffRates }) => {
       <Text fontSize="xl" fontWeight="bold" mb={4}>
         Fare Chart
       </Text>
-      <Table variant="simple">
+      <Table variant="simple" size="sm" overflowX="auto">
         <Thead>
           <Tr>
             <Th>Miles</Th>

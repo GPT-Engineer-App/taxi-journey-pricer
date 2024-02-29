@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
 import Index from "./pages/Index";
 import Sidebar from "./components/Sidebar";
 import ChartsDashboard from "./pages/ChartsDashboard";

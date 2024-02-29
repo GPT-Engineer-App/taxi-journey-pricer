@@ -27,7 +27,7 @@ const JobPriceInput = ({ onAddJobPrice }) => {
 const ShiftChart = ({ shifts }) => {
   const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   return (
-    <Table variant="striped" colorScheme="teal">
+    <Table variant="striped" colorScheme="teal" size="sm" overflowX="auto">
       <Thead>
         <Tr>
           <Th>Day</Th>

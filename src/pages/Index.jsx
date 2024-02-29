@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid, Select } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Text, VStack, useToast, Grid, Select, useBreakpointValue } from "@chakra-ui/react";
 import { FaTaxi } from "react-icons/fa";
 import FareChart from "../components/FareChart.jsx";
 
@@ -79,7 +79,7 @@ const Index = () => {
 
   return (
     <Container maxW="container.xl" p={10}>
-      <Grid templateColumns="repeat(2, 1fr)" gap={10}>
+      <Grid templateColumns={useBreakpointValue({ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" })} gap={6}>
         <FareChart tariffRates={tariffRates} />
         <Box borderWidth="1px" borderRadius="lg" p={8} w="100%" bg="gray.50">
           <VStack spacing={4}>

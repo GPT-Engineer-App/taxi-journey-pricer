@@ -1,11 +1,15 @@
 import React from "react";
-import { Box, VStack, Button } from "@chakra-ui/react";
+import { Box, VStack, Button, IconButton, useDisclosure, useBreakpointValue } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar, FaCalendarAlt } from "react-icons/fa";
+import { FaHome, FaInfo, FaCog, FaUserCircle, FaEnvelope, FaChartBar, FaCalendarAlt, FaBars } from "react-icons/fa";
 
 const Sidebar = () => {
+  const { isOpen, onToggle } = useDisclosure();
+  const displaySidebar = useBreakpointValue({ base: isOpen ? "block" : "none", md: "block" });
+
   return (
-    <Box w="200px" h="100vh" p={5} bg="brand.900" color="white">
+    <Box w={{ base: "full", md: "200px" }} h="100vh" p={5} bg="brand.900" color="white" display={displaySidebar}>
+      <IconButton aria-label="Open Menu" size="lg" mr={2} icon={<FaBars />} onClick={onToggle} display={{ md: "none" }} />
       <VStack align="stretch" spacing={5}>
         <Button leftIcon={<FaHome />} colorScheme="teal" as={NavLink} to="/">
           Home
