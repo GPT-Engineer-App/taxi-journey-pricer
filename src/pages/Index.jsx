@@ -99,7 +99,7 @@ const Index = () => {
               <Select placeholder="Select tariff" value={selectedTariff} onChange={(e) => setSelectedTariff(e.target.value)}>
                 {Object.entries(tariffRates).map(([tariffKey, tariff]) => (
                   <option value={tariffKey} key={tariffKey}>
-                    {tariffKey} ({tariff.startTime}:00 - {tariff.endTime === 0 ? "24" : tariff.endTime}:00)
+                    {tariffKey.replace("tariff1New", "Tariff 1 NEW").replace("tariff2New", "Tariff 2 NEW").replace("tariff3New", "Tariff 3 NEW")}({tariff.startTime}:00 - {tariff.endTime === 0 ? "24" : tariff.endTime}:00)
                   </option>
                 ))}
               </Select>
