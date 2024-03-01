@@ -25,7 +25,12 @@ const FareChart = ({ tariffRates }) => {
               const costPerMile = (tariff.distanceCost / (tariff.distanceYards / 1760)).toFixed(2);
               return (
                 <Th key={tariffKey}>
-                  Tariff {tariffKey.slice(-1)} <br /> (£{costPerMile}/mile)
+                  <Text as="span" display="block">
+                    Tariff {tariffKey.replace("tariff1New", "1 NEW").replace("tariff2New", "2 NEW").replace("tariff3New", "3 NEW")}
+                  </Text>
+                  <Text as="span" display="block">
+                    (£{costPerMile}/mile)
+                  </Text>
                 </Th>
               );
             })}
