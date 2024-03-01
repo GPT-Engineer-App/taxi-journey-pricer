@@ -14,12 +14,9 @@ const calculateAdditionalMileCost = (tariffRates) => {
 
 const tariffRates = {
   tariff1: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 168, distanceCost: 0.2 },
+  // Tariff 2: Monday to Friday 9.00pm to 12.00am, Saturdays, Sundays
   tariff2: { startTime: 21, endTime: 24, startFee: 2.6, distanceYards: 130, distanceCost: 0.2 },
   tariff3: { startTime: 0, endTime: 6, startFee: 3.2, distanceYards: 130, distanceCost: 0.2 },
-  tariff1new: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 160, distanceCost: 0.2 },
-  tariff2newWeekday: { startTime: 20, endTime: 24, startFee: 2.6, distanceYards: 116, distanceCost: 0.2 },
-  tariff2newWeekend: { startTime: 0, endTime: 24, startFee: 2.6, distanceYards: 116, distanceCost: 0.2 },
-  tariff3new: { startTime: 0, endTime: 6, startFee: 3.6, distanceYards: 116, distanceCost: 0.2 },
 };
 
 const Index = () => {
@@ -98,14 +95,11 @@ const Index = () => {
               </NumberInput>
               <FormLabel mt={4}>Select Tariff</FormLabel>
               <Select placeholder="Select tariff" onChange={(e) => setSelectedTariff(e.target.value)}>
-                {Object.keys(tariffRates).map((tariffKey) => {
-                  const isWeekendTariff = tariffKey.includes("Weekend");
-                  return (
-                    <option value={tariffKey} key={tariffKey}>
-                      {isWeekendTariff ? `${tariffKey.slice(0, -7)} (Weekend & Bank Holidays)` : `Tariff ${tariffKey.slice(-1)}`}
-                    </option>
-                  );
-                })}
+                {Object.keys(tariffRates).map((tariffKey) => (
+                  <option value={tariffKey} key={tariffKey}>
+                    Tariff {tariffKey.slice(-1)}
+                  </option>
+                ))}
               </Select>
             </FormControl>
 
