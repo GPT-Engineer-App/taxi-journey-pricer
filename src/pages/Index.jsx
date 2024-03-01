@@ -16,9 +16,9 @@ const tariffRates = {
   tariff1: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 168, distanceCost: 0.2 },
   tariff2: { startTime: 21, endTime: 0, startFee: 2.6, distanceYards: 130, distanceCost: 0.2 },
   tariff3: { startTime: 0, endTime: 6, startFee: 3.2, distanceYards: 130, distanceCost: 0.2 },
-  tariff1new: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 160, distanceCost: 0.2 },
-  tariff2new: { startTime: 20, endTime: 0, startFee: 2.6, distanceYards: 116, distanceCost: 0.2 },
-  tariff3new: { startTime: 0, endTime: 6, startFee: 3.6, distanceYards: 116, distanceCost: 0.2 },
+  tariff1New: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 160, distanceCost: 0.2 },
+  tariff2New: { startTime: 20, endTime: 0, startFee: 2.6, distanceYards: 116, distanceCost: 0.2 },
+  tariff3New: { startTime: 0, endTime: 6, startFee: 3.6, distanceYards: 116, distanceCost: 0.2 },
 };
 
 const Index = () => {
@@ -96,10 +96,10 @@ const Index = () => {
                 <NumberInputField />
               </NumberInput>
               <FormLabel mt={4}>Select Tariff</FormLabel>
-              <Select placeholder="Select tariff" onChange={(e) => setSelectedTariff(e.target.value)}>
-                {Object.keys(tariffRates).map((tariffKey) => (
+              <Select placeholder="Select tariff" value={selectedTariff} onChange={(e) => setSelectedTariff(e.target.value)}>
+                {Object.entries(tariffRates).map(([tariffKey, tariff]) => (
                   <option value={tariffKey} key={tariffKey}>
-                    Tariff {tariffKey.slice(-1)}
+                    {tariffKey} ({tariff.startTime}:00 - {tariff.endTime === 0 ? "24" : tariff.endTime}:00)
                   </option>
                 ))}
               </Select>
@@ -127,9 +127,9 @@ const Index = () => {
                 <VStack spacing={2}>
                   {useMemo(
                     () =>
-                      Object.entries(calculateAdditionalMileCost(tariffRates)).map(([key, cost]) => (
-                        <Text fontSize="md" key={key}>
-                          Tariff {key.slice(-1)}: £{cost}
+                      Object.entries(calculateAdditionalMileCost(tariffRates)).map(([tariffKey, cost]) => (
+                        <Text fontSize="md" key={tariffKey}>
+                          {tariffKey}: £{cost}
                         </Text>
                       )),
                     [tariffRates],
