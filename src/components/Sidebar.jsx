@@ -8,8 +8,8 @@ const Sidebar = () => {
   const displaySidebar = useBreakpointValue({ base: isOpen ? "block" : "none", md: "block" });
 
   return (
-    <Box w={{ base: "full", md: "200px" }} h="100vh" p={5} bg="brand.900" color="white" position={{ base: "fixed", md: "static" }} zIndex="overlay" display={displaySidebar} left={isOpen ? "0" : "-100%"}>
-      <IconButton aria-label="Open Menu" size="lg" mr={2} icon={<FaBars />} onClick={onToggle} display={{ base: "inherit", md: "none" }} position="absolute" top="1rem" left="1rem" />
+    <Box w={{ base: "full", md: "200px" }} h="100vh" p={5} bg="brand.900" color="white" display={displaySidebar}>
+      <IconButton aria-label="Open Menu" size="lg" mr={2} icon={<FaBars />} onClick={onToggle} display={{ md: "none" }} />
       <VStack align="stretch" spacing={5}>
         <Button leftIcon={<FaHome />} colorScheme="teal" as={NavLink} to="/">
           Home

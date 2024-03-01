@@ -118,59 +118,9 @@ const Shift = () => {
     });
     setTimerOn(false);
   };
-  // Correcting the duplicate JobHistoryTable component
-  const JobHistoryTable = ({ jobs }) => {
-    return (
-      <Table variant="striped" colorScheme="teal" size="sm">
-        <Thead>
-          <Tr>
-            <Th>Job ID</Th>
-            <Th>Price (£)</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {jobs.map((job, index) => (
-            <Tr key={index}>
-              <Td>{index + 1}</Td>
-              <Td>{job.toFixed(2)}</Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    );
-  };
+  // This block is removed as it was a duplicate caused by incorrect merge in the previous edit
 
-  // Removing the duplicated return block and fixing the reference to shiftChart
-  return (
-    <VStack spacing={10} p={8}>
-      <Box>
-        <VStack spacing={4}>
-          <Text fontSize="3xl" fontWeight="bold">
-            Shift Timer
-          </Text>
-          <Text fontSize="xl">{currentShift.duration || "00:00:00"}</Text>
-          <Button size="md" colorScheme="green" onClick={startShift} isDisabled={timerOn}>
-            Start
-          </Button>
-          <Button size="md" colorScheme="yellow" onClick={pauseShift} isDisabled={!timerOn}>
-            Pause
-          </Button>
-          <Button size="md" colorScheme="red" onClick={stopShift} isDisabled={!currentShift.startTime}>
-            Stop
-          </Button>
-        </VStack>
-      </Box>
-      <Box w="100%" p={4} shadow="md">
-        {shiftChart}
-        <JobPriceInput onAddJobPrice={addJobPrice} />
-        <Text fontSize="xl" fontWeight="bold">
-          Total Earnings: £{currentShift.totalEarnings.toFixed(2)}
-        </Text>
-        <Text>Earnings Per Hour: £{currentShift.earningsPerHour || "0.00"}</Text>
-        <JobHistoryTable jobs={currentShift.jobs} />
-      </Box>
-    </VStack>
-  );
+  const shiftChart = useMemo(() => <ShiftChart shifts={shifts} />, [shifts]);
 
   return (
     <VStack spacing={10} p={8}>
