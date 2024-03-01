@@ -14,7 +14,7 @@ const calculateAdditionalMileCost = (tariffRates) => {
 
 const tariffRates = {
   tariff1: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 168, distanceCost: 0.2 },
-  tariff2: { startTime: 21, endTime: 0, startFee: 2.6, distanceYards: 130, distanceCost: 0.2 },
+  tariff2: { startTime: 20, endTime: 0, startFee: 2.6, distanceYards: 130, distanceCost: 0.2 },
   tariff3: { startTime: 0, endTime: 6, startFee: 3.2, distanceYards: 130, distanceCost: 0.2 },
   tariff1New: { startTime: 6, endTime: 20, startFee: 2.6, distanceYards: 160, distanceCost: 0.2 },
   tariff2New: { startTime: 20, endTime: 0, startFee: 2.6, distanceYards: 116, distanceCost: 0.2 },
